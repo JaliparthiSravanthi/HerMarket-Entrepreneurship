@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HerMarket - Login & Register</title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='FRONTENDher.css') }}">
+</head>
+<body>
+
+<div class="section auth">
+  <div class="auth-card">
+
+    <!-- RADIO BUTTONS -->
+    <input type="radio" name="authTab" id="tab-login" checked>
+    <input type="radio" name="authTab" id="tab-register">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <label for="tab-login" class="tab">Login</label>
+      <label for="tab-register" class="tab">Register</label>
+    </div>
+
+    <!-- PANELS -->
+    <div class="panels">
+
+      <!-- LOGIN PANEL -->
+      <div class="panel">
+       <form class="form" method="POST" action="/login">
+          <label>
+            Role
+            <select name="role" required>
+              <option value="seller">Seller</option>
+              <option value="customer">Customer</option>
+            </select>
+          </label>
+
+          <label>
+            Email
+            <input type="email" name="email" required>
+          </label>
+
+          <label>
+            Password
+            <input type="password" name="password" required>
+          </label>
+
+          <button class="btn primary" type="submit">
+            Login
+          </button>
+        </form>
+      </div>
+
+      <!-- REGISTER PANEL -->
+      <div class="panel">
+        <form class="form" method="POST" action="/register">
+
+          <div class="form-row">
+            <label>
+              Role
+              <select name="role" id="roleSelect">
+                <option value="seller">Seller</option>
+                <option value="customer">Customer</option>
+              </select>
+            </label>
+
+            <label>
+              Full Name
+              <input type="text" name="name" required>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Email
+              <input type="email" name="email" required>
+            </label>
+
+            <label>
+              Phone
+              <input type="text" name="location" required>
+            </label>
+          </div>
+
+          <label>
+            Password
+            <input type="password" name="password" required>
+          </label>
+
+          <!-- NEW: CONFIRM PASSWORD -->
+          <label>
+            Confirm Password
+            <input type="password" placeholder="Re-enter password" required>
+          </label>
+          </label>
+          
+          <!-- SELLER ONLY SECTION -->
+          <div class="seller-only">
+            <label>
+              Upload ID Proof (Aadhaar / Govt ID)
+              <input type="file" name=""aadhaar accept="image/*,.pdf">
+            </label>
+
+            <!-- INLINE CHECKBOX -->
+            <div class="checkbox-row">
+              <input type="checkbox" id="womanCheck" required>
+              <span>I confirm I am a woman entrepreneur</span>
+            </div>
+          </div>
+
+        
+
+         <button class="btn primary" type="submit">
+            Create Account
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
