@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cart</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6fb;
+            padding:30px;
+        }
+
+        .cart-container{
+            max-width:1000px;
+            margin:auto;
+        }
+
+        .cart-item{
+            background:white;
+            padding:20px;
+            border-radius:15px;
+            margin-bottom:20px;
+            display:flex;
+            gap:20px;
+            align-items:center;
+        }
+
+        .cart-image{
+            width:120px;
+            height:120px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        .cart-details{
+            flex:1;
+        }
+
+        .price{
+            color:#2563eb;
+            font-weight:bold;
+        }
+        .remove-btn{
+    background:#ef4444;
+    color:white;
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-block;
+    margin-top:10px;
+}
+
+.remove-btn:hover{
+    background:#dc2626;
+}
+.quantity-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:10px;
+}
+
+.qty-btn{
+    background:#2563eb;
+    color:white;
+    padding:6px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.remove-btn{
+    background:#ef4444;
+    color:white;
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-block;
+    margin-top:12px;
+}
+.cart-footer{
+    max-width:1000px;
+    margin:30px auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.checkout-btn{
+    background:#10b981;
+    color:white;
+    padding:14px 24px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.back-btn{
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:600;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="cart-container">
+
+<h1>🛒 My Cart</h1>
+
+{% for item in cart_items %}
+
+<div class="cart-item">
+
+    {% if item.image %}
+
+    <img
+        class="cart-image"
+        src="{{ url_for('static', filename='uploads/' + item.image) }}">
+
+    {% endif %}
+
+    <div class="cart-details">
+
+        <h3>{{ item.title }}</h3>
+
+        <p class="price">
+            ₹{{ item.price }}
+        </p>
+
+<div class="quantity-box">
+
+  <a href="/decrease-quantity/{{ item.id }}" class="qty-btn">−</a>
+
+  <span>Quantity: {{ item.quantity }}</span>
+
+  <a href="/increase-quantity/{{ item.id }}" class="qty-btn">+</a>
+
+</div>
+
+<a href="/remove-from-cart/{{ item.id }}" class="remove-btn">
+  Remove
+</a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+<div class="cart-footer">
+  <a href="/customer" class="back-btn">← Continue Shopping</a>
+  <a href="/address" class="checkout-btn">Proceed to Checkout</a>
+</div>
+
+</body>
+</html

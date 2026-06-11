@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Details - HerMarket</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6fb;
+}
+
+.header{
+    background:#111827;
+    color:white;
+    padding:20px 40px;
+}
+
+.container{
+    max-width:1000px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.order-summary{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    margin-bottom:25px;
+}
+
+.order-item{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:20px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+.order-image{
+    width:130px;
+    height:130px;
+    object-fit:cover;
+    border-radius:14px;
+    background:#e5e7eb;
+}
+
+.item-info{
+    flex:1;
+}
+
+.price{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.status{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:20px;
+    background:#e0f2fe;
+    color:#0369a1;
+    font-weight:600;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:#2563eb;
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+@media(max-width:700px){
+    .order-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .order-image{
+        width:100%;
+        height:220px;
+    }
+}
+.review-form{
+    margin-top:18px;
+    background:#f9fafb;
+    padding:18px;
+    border-radius:14px;
+    border:1px solid #e5e7eb;
+}
+
+.review-form h4{
+    margin-top:0;
+    color:#111827;
+}
+
+.review-form select,
+.review-form textarea{
+    width:100%;
+    padding:11px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.review-form textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.review-form button{
+    margin-top:12px;
+    background:#10b981;
+    color:white;
+    border:none;
+    padding:11px 16px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.review-form button:hover{
+    background:#059669;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>🛍 HerMarket - Order Details</h2>
+</div>
+
+<div class="container">
+
+<div class="order-summary">
+    <h2>Order #{{ items[0].order_id }}</h2>
+    <p>Total Amount: <strong>₹{{ items[0].total_amount }}</strong></p>
+    <p>Status: <span class="status">{{ items[0].status }}</span></p>
+    <p>Date: {{ items[0].created_at }}</p>
+</div>
+
+{% for item in items %}
+
+<div class="order-item">
+
+    {% if item.image %}
+    <img class="order-image"
+         src="{{ url_for('static', filename='uploads/' + item.image) }}">
+    {% else %}
+    <div class="order-image"
+         style="display:flex;align-items:center;justify-content:center;">
+        No Image
+    </div>
+    {% endif %}
+
+    <div class="item-info">
+        <h3>{{ item.title }}</h3>
+        <p class="price">Price: ₹{{ item.price }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+        <p>Subtotal: ₹{{ item.price * item.quantity }}</p>
+        {% if items[0].status == "Delivered" %}
+
+    {% if item.product_id in reviewed_product_ids %}
+
+        <p style="color:#10b981;font-weight:600;">
+            ✅ You already reviewed this product.
+        </p>
+
+    {% else %}
+
+        <form method="POST"
+              action="/add-review/{{ item.product_id }}/{{ items[0].order_id }}"
+              class="review-form">
+
+            <h4>⭐ Write a Review</h4>
+
+            <select name="rating" required>
+                <option value="">Select Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+
+            <textarea name="comment"
+                      placeholder="Write your review..."
+                      required></textarea>
+
+            <button type="submit">
+                Submit Review
+            </button>
+
+        </form>
+
+    {% endif %}
+
+{% endif %}
+</div>
+</div>
+{% endfor %}
+  

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Seller Orders - HerMarket</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6fb;
+}
+
+.header{
+    background:#111827;
+    color:white;
+    padding:20px 40px;
+}
+
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.order-card{
+    background:white;
+    padding:22px;
+    border-radius:18px;
+    margin-bottom:20px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
+
+.order-img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:14px;
+    background:#e5e7eb;
+}
+
+.order-info{
+    flex:1;
+}
+
+.status{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:20px;
+    background:#e0f2fe;
+    color:#0369a1;
+    font-weight:600;
+}
+
+.address-box{
+    background:#f9fafb;
+    padding:15px;
+    border-radius:12px;
+    margin:15px 0;
+    border:1px solid #e5e7eb;
+}
+
+.status-form{
+    margin-top:15px;
+}
+
+.status-form select{
+    padding:9px;
+    border-radius:8px;
+    border:1px solid #d1d5db;
+}
+
+.status-form button{
+    padding:9px 14px;
+    border:none;
+    border-radius:8px;
+    background:#10b981;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:#2563eb;
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>📦 HerMarket - Seller Orders</h2>
+</div>
+
+<div class="container">
+
+<h1>Orders Received</h1>
+
+{% if orders %}
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+        {% if order.image %}
+        <img class="order-img"
+             src="{{ url_for('static', filename='uploads/' + order.image) }}">
+        {% else %}
+        <div class="order-img"
+             style="display:flex;align-items:center;justify-content:center;">
+            No Image
+        </div>
+        {% endif %}
+
+        <div class="order-info">
+
+            <h3>{{ order.title }}</h3>
+
+            <p><strong>Order ID:</strong> #{{ order.order_id }}</p>
+            <p><strong>Customer:</strong> {{ order.customer_name }}</p>
+
+            <div class="address-box">
+                <h4>Delivery Address</h4>
+
+                {% if order.full_name %}
+                    <p><strong>{{ order.full_name }}</strong></p>
+                    <p>{{ order.phone }}</p>
+                    <p>{{ order.address }}</p>
+                    <p>{{ order.city }}, {{ order.state }} - {{ order.pincode }}</p>
+                {% else %}
+                    <p>No address available for this order.</p>
+                {% endif %}
+            </div>
+
+            <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+            <p><strong>Price:</strong> ₹{{ order.price }}</p>
+            <p><strong>Date:</strong> {{ order.created_at }}</p>
+
+            <span class="status">{{ order.status }}</span>
+
+            <form method="POST"
+                  action="/update-order-status/{{ order.order_id }}"
+                  class="status-form">
+
+                <select name="status" required>
+                    <option value="Processing">Processing</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+
+                <button type="submit">
+                    Update Status
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+<p>No orders received yet.</p>
+
+{% endif %}
+
+<a href="/seller" class="back-btn">← Back to Seller Dashboard</a>
+
+</div>
+
+</body>
+</html>

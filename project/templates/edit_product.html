@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Product</title>
+
+  <style>
+    body {
+      background: #f4f6fb;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .edit-card {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #111827;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button,
+    .back-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .back-btn {
+      background: #6b7280;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="edit-card">
+    <h2>Edit Product</h2>
+
+    <form method="POST">
+
+      <input type="text"
+             name="title"
+             value="{{ product.title }}"
+             required>
+
+      <textarea name="description">{{ product.description }}</textarea>
+
+      <input type="number"
+             name="price"
+             value="{{ product.price }}"
+             required>
+      
+      <input type="text"
+             name="category"
+             value="{{ product.category }}"
+             required>
+      <label>Stock</label>
+
+      <input type="number"
+       name="stock"
+       value="{{ product.stock }}"
+       required>
+      <button type="submit">
+        Update Product
+      </button>
+
+      <a href="/seller" class="back-btn">
+        Back
+      </a>
+
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Seller Analytics - HerMarket</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6fb;
+}
+
+.header{
+    background:#111827;
+    color:white;
+    padding:22px 40px;
+}
+
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.analytics-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:22px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+.card h3{
+    color:#6b7280;
+    margin-bottom:12px;
+}
+
+.card p{
+    font-size:32px;
+    font-weight:bold;
+    margin:0;
+    color:#111827;
+}
+
+.revenue{
+    color:#10b981 !important;
+}
+
+.rating{
+    color:#f59e0b !important;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:30px;
+    background:#2563eb;
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>📊 HerMarket - Seller Analytics</h2>
+</div>
+
+<div class="container">
+
+<h1>Business Overview</h1>
+
+<div class="analytics-grid">
+
+    <div class="card">
+        <h3>Total Products</h3>
+        <p>{{ total_products }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Orders</h3>
+        <p>{{ total_orders }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Revenue</h3>
+        <p class="revenue">₹{{ total_revenue }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Average Rating</h3>
+        <p class="rating">⭐ {{ avg_rating }}</p>
+    </div>
+
+</div>
+
+<a href="/seller" class="back-btn">
+    ← Back to Seller Dashboard
+</a>
+
+</div>
+
+</body>
+</html>

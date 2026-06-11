@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Delivery Address - HerMarket</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6fb;
+}
+
+.address-container{
+    max-width:700px;
+    margin:60px auto;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+h1{
+    color:#111827;
+    margin-bottom:10px;
+}
+
+p{
+    color:#6b7280;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#374151;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:13px 22px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#1d4ed8;
+}
+
+.back-link{
+    display:inline-block;
+    margin-top:18px;
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:600;
+}
+
+@media(max-width:700px){
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .address-container{
+        margin:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="address-container">
+
+    <h1>Delivery Address</h1>
+    <p>Enter your delivery details before placing the order.</p>
+
+    <form method="POST">
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="full_name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label>Full Address</label>
+            <textarea name="address" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" required>
+            </div>
+
+            <div class="form-group">
+                <label>State</label>
+                <input type="text" name="state" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Pincode</label>
+            <input type="text" name="pincode" required>
+        </div>
+
+        <button type="submit" class="btn">
+            Save Address & Continue
+        </button>
+
+    </form>
+
+    <a href="/cart" class="back-link">
+        ← Back to Cart
+    </a>
+
+</div>
+
+</body>
+</html>
